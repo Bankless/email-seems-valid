@@ -1,4 +1,4 @@
-import { emailSeemsValid } from '../../index';
+import { emailSeemsValid } from '../index';
 
 describe('form validations', () => {
   it('valid emails', () => {
