@@ -1,7 +1,7 @@
 {
   "name": "email-seems-valid",
   "description": "An offline check to see if an email seems valid",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "sideEffects": false,
   "main": "./lib/cjs/index.js",
