@@ -50,6 +50,7 @@ export function emailSeemsValid(emailAddress: string): boolean {
     !emailAddress.includes('@gna') &&
     !emailAddress.includes('@gemail') &&
     !emailAddress.includes('@protonmai.') &&
+    !emailAddress.includes('@protonmi') &&
     // ends with
     !emailAddress.match(/@.*\.com.$/) &&
     !emailAddress.match(/@.*\.con.*$/) &&
