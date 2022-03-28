@@ -1,7 +1,7 @@
 {
   "name": "email-seems-valid",
   "description": "An offline check to see if an email seems valid",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "sideEffects": false,
   "main": "./lib/cjs/index.js",
@@ -45,7 +45,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run tsc"
+      "pre-commit": "lint-staged && npm run test"
     }
   },
   "lint-staged": {
