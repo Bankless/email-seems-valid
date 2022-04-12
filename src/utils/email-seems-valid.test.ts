@@ -43,6 +43,7 @@ describe('form validations', () => {
     expect(emailSeemsValid('test@gmail.colm')).toBe(false);
     expect(emailSeemsValid('test@gmail.om')).toBe(false);
 
+    expect(emailSeemsValid('test@protonmail.cpm')).toBe(false);
     expect(emailSeemsValid('test@protonmail.comc')).toBe(false);
     expect(emailSeemsValid('test@protonmail.come')).toBe(false);
     expect(emailSeemsValid('test@protonmail.comm')).toBe(false);

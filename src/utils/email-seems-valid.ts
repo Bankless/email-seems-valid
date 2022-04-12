@@ -45,6 +45,7 @@ export function emailSeemsValid(emailAddress: string): boolean {
     !emailAddress.match(/@.*\.com.$/) &&
     !emailAddress.match(/@.*\.con.*$/) &&
     !emailAddress.match(/@.*\.col.*$/) &&
+    !emailAddress.match(/@.*\.c[^o]m.*$/) &&
     !emailAddress.endsWith('foxmail.co') &&
     !emailAddress.endsWith('.ocm') &&
     !emailAddress.endsWith('.om') &&
