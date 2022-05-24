@@ -4,17 +4,33 @@ describe('form validations', () => {
   it('valid emails', () => {
     expect(emailSeemsValid('test@crazy.finance')).toBe(true);
     expect(emailSeemsValid('test@yahoo.com')).toBe(true);
+    expect(emailSeemsValid('test@yahoo.COM')).toBe(true);
     expect(emailSeemsValid('test@gmail.com')).toBe(true);
+
     expect(emailSeemsValid('a@protonmail.com')).toBe(true);
     expect(emailSeemsValid('test@dawsbot.io')).toBe(true);
     expect(emailSeemsValid('test@protonmail.com')).toBe(true);
 
     expect(emailSeemsValid('test@foxmail.com')).toBe(true);
 
-    expect(emailSeemsValid('test.another.third@outlook.com')).toBe(true);
+    expect(emailSeemsValid('company@company.co')).toBe(true);
+    expect(emailSeemsValid('company@company.io')).toBe(true);
+    expect(emailSeemsValid('company@company.xyz')).toBe(true);
+    expect(emailSeemsValid('company@company.wtf')).toBe(true);
+    expect(emailSeemsValid('company@company.gov')).toBe(true);
+
+    expect(emailSeemsValid('a.comy.test@gmail.com')).toBe(true);
+    expect(emailSeemsValid('a.coml.test@gmail.com')).toBe(true);
+    expect(emailSeemsValid('a.coml.cxm.vom@gmail.com')).toBe(true);
+    expect(emailSeemsValid('coml.cxm.vom@cop.cpm.pom.comm.com')).toBe(true);
   });
   it('invalid emails', () => {
-    // inavlid characters (amazon SES rejects these)
+    expect(emailSeemsValid('@gmail.com')).toBe(false);
+    expect(emailSeemsValid('bad@com')).toBe(false);
+    expect(emailSeemsValid('test@@gmail.com')).toBe(false);
+    expect(emailSeemsValid('test@gmail@com')).toBe(false);
+
+    // invalid characters (amazon SES rejects these)
     expect(emailSeemsValid('!test@gmail.com')).toBe(false);
     expect(emailSeemsValid('&test@gmail.com')).toBe(false);
     expect(emailSeemsValid('*test@gmail.com')).toBe(false);
@@ -25,7 +41,7 @@ describe('form validations', () => {
     // must have "@"
     expect(emailSeemsValid('no')).toBe(false);
 
-    // mis-spellings
+    // mis-spellings of gmail
     expect(emailSeemsValid('test@gmail.ocm')).toBe(false);
     expect(emailSeemsValid('test@gmail.ccom')).toBe(false);
     expect(emailSeemsValid('test@gmail.comc')).toBe(false);
@@ -38,11 +54,22 @@ describe('form validations', () => {
     expect(emailSeemsValid('test@gnal.com')).toBe(false);
     expect(emailSeemsValid('test@gail.com')).toBe(false);
     expect(emailSeemsValid('test@gmil.com')).toBe(false);
+
+    // bad suffixes
     expect(emailSeemsValid('test@gmail.comn')).toBe(false);
     expect(emailSeemsValid('test@gmail.col')).toBe(false);
     expect(emailSeemsValid('test@gmail.colm')).toBe(false);
     expect(emailSeemsValid('test@gmail.om')).toBe(false);
+    expect(emailSeemsValid('test@gmail.comy')).toBe(false);
+    expect(emailSeemsValid('test@gmail.comyy')).toBe(false);
 
+    expect(emailSeemsValid('test@gmail.xom')).toBe(false);
+    expect(emailSeemsValid('test@gmail.coml')).toBe(false);
+    expect(emailSeemsValid('test@gmail.copm')).toBe(false);
+    expect(emailSeemsValid('test@gmail.vom')).toBe(false);
+    expect(emailSeemsValid('test@gmail.ckm')).toBe(false);
+
+    // mis-spellings of protonmail
     expect(emailSeemsValid('test@protonmail.cpm')).toBe(false);
     expect(emailSeemsValid('test@protonmail.comc')).toBe(false);
     expect(emailSeemsValid('test@protonmail.come')).toBe(false);

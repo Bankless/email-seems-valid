@@ -12,6 +12,10 @@ import isEmail from 'validator/lib/isEmail';
  * ```
  */
 export function emailSeemsValid(emailAddress: string): boolean {
+  if (typeof emailAddress !== 'string' || !isEmail(emailAddress)) {
+    return false;
+  }
+  emailAddress = emailAddress.toLowerCase();
   // blocks characters which Amazon SES cannot support in emails (like "&" or "i̇")
   const hasCharacterOutsideRange = emailAddress.split('').some((letter) => {
     const utf16Code = letter.charCodeAt(0);
@@ -21,38 +25,56 @@ export function emailSeemsValid(emailAddress: string): boolean {
     // '~'.charCodeAt() === 126
     return utf16Code < 43 || utf16Code > 126;
   });
+  const doesNotInclude: ReadonlyArray<string> = [
+    '@gmial',
+    '@gmaik',
+    '@gail',
+    '@gmak',
+    '@gamai',
+    '@gamil.',
+    '@gamal.',
+    '@gmai.',
+    '@gmial',
+    '@gmil.',
+    '@gmal',
+    '@gmmail',
+    '@gna',
+    '@gemail',
+    '@protonmai.',
+    '@protonmi',
+  ];
+
+  const doesNotEndWith: ReadonlyArray<string> = [
+    'foxmail.co',
+    '.ocm',
+    '.om',
+    '@gmail.co',
+    '@protonmail.co',
+    '.ccom',
+    '.coom',
+    '.cmo',
+  ];
+  const [, domainName] = emailAddress.split('@');
+
+  // domain must have "." to separate TLD
+  if (!domainName.includes('.')) {
+    return false;
+  }
+
+  const tld = domainName.split('.').pop() as string;
   return (
-    isEmail(emailAddress) &&
     !hasCharacterOutsideRange &&
-    !emailAddress.includes('@gmial') &&
-    !emailAddress.includes('gmaik.com') &&
-    !emailAddress.includes('.comy') &&
-    !emailAddress.includes('@gail') &&
-    !emailAddress.includes('@gmak') &&
-    !emailAddress.includes('@gamai') &&
-    !emailAddress.includes('@gamil.') &&
-    !emailAddress.includes('@gamal.') &&
-    !emailAddress.includes('@gmai.') &&
-    !emailAddress.includes('@gmial') &&
-    !emailAddress.includes('@gmil.') &&
-    !emailAddress.includes('@gmal') &&
-    !emailAddress.includes('@gmmail') &&
-    !emailAddress.includes('@gna') &&
-    !emailAddress.includes('@gemail') &&
-    !emailAddress.includes('@protonmai.') &&
-    !emailAddress.includes('@protonmi') &&
+    !doesNotInclude.some((invalidSubstring) =>
+      emailAddress.includes(invalidSubstring),
+    ) &&
+    !doesNotEndWith.some((invalidSubstring) =>
+      emailAddress.endsWith(invalidSubstring),
+    ) &&
     // ends with
-    !emailAddress.match(/@.*\.com.$/) &&
-    !emailAddress.match(/@.*\.con.*$/) &&
-    !emailAddress.match(/@.*\.col.*$/) &&
-    !emailAddress.match(/@.*\.c[^o]m.*$/) &&
-    !emailAddress.endsWith('foxmail.co') &&
-    !emailAddress.endsWith('.ocm') &&
-    !emailAddress.endsWith('.om') &&
-    !emailAddress.endsWith('@gmail.co') &&
-    !emailAddress.endsWith('@protonmail.co') &&
-    !emailAddress.endsWith('.ccom') &&
-    !emailAddress.endsWith('.coom') &&
-    !emailAddress.endsWith('.cmo')
+    !tld.match(/com.+$/) &&
+    !tld.match(/co[a-ln-z]+$/) &&
+    !tld.match(/c[^o]m$/) &&
+    !tld.match(/co[^m]m$/) &&
+    !tld.match(/[^c]om$/)
   );
 }
