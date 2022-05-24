@@ -34,7 +34,6 @@ export function emailSeemsValid(emailAddress: string): boolean {
     '@gamil.',
     '@gamal.',
     '@gmai.',
-    '@gmial',
     '@gmil.',
     '@gmal',
     '@gmmail',
@@ -54,6 +53,37 @@ export function emailSeemsValid(emailAddress: string): boolean {
     '.coom',
     '.cmo',
   ];
+  // a subsection of https://github.com/incognico/list-of-top-level-domains/blob/master/tlds.csv
+  // chosen because of the popularity of ".co*" mispellings
+  const validTlds: ReadonlyArray<string> = [
+    'coach',
+    'codes',
+    'coffee',
+    'college',
+    'cologne',
+    'com',
+    'comcast',
+    'commbank',
+    'community',
+    'company',
+    'compare',
+    'computer',
+    'comsec',
+    'condos',
+    'construction',
+    'consulting',
+    'contact',
+    'contractors',
+    'cooking',
+    'cookingchannel',
+    'cool',
+    'coop',
+    'corsica',
+    'country',
+    'coupon',
+    'coupons',
+    'courses',
+  ];
   const [, domainName] = emailAddress.split('@');
 
   // domain must have "." to separate TLD
@@ -62,19 +92,30 @@ export function emailSeemsValid(emailAddress: string): boolean {
   }
 
   const tld = domainName.split('.').pop() as string;
-  return (
-    !hasCharacterOutsideRange &&
-    !doesNotInclude.some((invalidSubstring) =>
-      emailAddress.includes(invalidSubstring),
-    ) &&
-    !doesNotEndWith.some((invalidSubstring) =>
-      emailAddress.endsWith(invalidSubstring),
-    ) &&
-    // ends with
-    !tld.match(/com.+$/) &&
-    !tld.match(/co[a-ln-z]+$/) &&
-    !tld.match(/c[^o]m$/) &&
-    !tld.match(/co[^m]m$/) &&
-    !tld.match(/[^c]om$/)
+  const hasValidTLD = validTlds.some((validTld) => tld === validTld);
+  const endsWithInvalidSubstring = doesNotEndWith.some((invalidSubstring) =>
+    emailAddress.endsWith(invalidSubstring),
+  );
+  const includesInvalidSubstring = doesNotInclude.some((invalidSubstring) =>
+    emailAddress.includes(invalidSubstring),
+  );
+
+  if (
+    hasCharacterOutsideRange ||
+    includesInvalidSubstring ||
+    endsWithInvalidSubstring
+  ) {
+    return false;
+  }
+  if (hasValidTLD) {
+    return true;
+  }
+
+  return !(
+    /c[^o]+m$/.test(tld) ||
+    /co[^m]+$/.test(tld) ||
+    /co[^m]+m$/.test(tld) ||
+    /[^c]om$/.test(tld) ||
+    /com.+$/.test(tld)
   );
 }
