@@ -13,6 +13,12 @@ describe('form validations', () => {
 
     expect(emailSeemsValid('test@foxmail.com')).toBe(true);
 
+    expect(emailSeemsValid('company@company.co')).toBe(true);
+    expect(emailSeemsValid('company@company.io')).toBe(true);
+    expect(emailSeemsValid('company@company.xyz')).toBe(true);
+    expect(emailSeemsValid('company@company.wtf')).toBe(true);
+    expect(emailSeemsValid('company@company.gov')).toBe(true);
+
     expect(emailSeemsValid('a.comy.test@gmail.com')).toBe(true);
     expect(emailSeemsValid('a.coml.test@gmail.com')).toBe(true);
     expect(emailSeemsValid('a.coml.cxm.vom@gmail.com')).toBe(true);
