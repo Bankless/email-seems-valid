@@ -31,6 +31,8 @@ describe('form validations', () => {
     expect(emailSeemsValid('a.coml.test@gmail.com')).toBe(true);
     expect(emailSeemsValid('a.coml.cxm.vom@gmail.com')).toBe(true);
     expect(emailSeemsValid('coml.cxm.vom@cop.cpm.pom.comm.com')).toBe(true);
+    expect(emailSeemsValid('coml.cxm.vom@cop.cpm.pom.comm.co.jp')).toBe(true);
+    expect(emailSeemsValid('test@scotland.scot')).toBe(true);
   });
   it('special characters', () => {
     expect(emailSeemsValid('!test@gmail.com')).toBe(false);
@@ -80,6 +82,7 @@ describe('form validations', () => {
 
     expect(emailSeemsValid('test@gmail.xom')).toBe(false);
     expect(emailSeemsValid('test@gmail.xxom')).toBe(false);
+    expect(emailSeemsValid('test@gmail.xcom')).toBe(false);
     expect(emailSeemsValid('test@gmail.coml')).toBe(false);
     expect(emailSeemsValid('test@gmail.comll')).toBe(false);
     expect(emailSeemsValid('test@gmail.copm')).toBe(false);

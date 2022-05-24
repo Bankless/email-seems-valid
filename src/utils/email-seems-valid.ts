@@ -110,9 +110,9 @@ export function emailSeemsValid(emailAddress: string): boolean {
   }
 
   return !(
-    /c[^o]+.*m$/.test(tld) ||
-    /co[^m]+.*$/.test(tld) ||
-    /[^c]om$/.test(tld) ||
-    /com.+$/.test(tld)
+    /^c[^o]+.*m$/.test(tld) ||
+    /^co[^m]+.*$/.test(tld) ||
+    /^[^c].*om$/.test(tld) ||
+    /^com.+$/.test(tld)
   );
 }

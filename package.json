@@ -19,7 +19,7 @@
     "build": "rm -rf lib && npm run compile",
     "prepublishOnly": "npm run build",
     "jest": "jest",
-    "postversion": "git push --follow-tags && gh release create --generate-notes"
+    "postversion": "git push --follow-tags && npm publish && gh release create --generate-notes"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
