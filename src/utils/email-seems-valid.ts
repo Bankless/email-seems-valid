@@ -41,6 +41,7 @@ export function emailSeemsValid(emailAddress: string): boolean {
     '@gemail',
     '@protonmai.',
     '@protonmi',
+    '@hotmai.',
   ];
 
   const doesNotEndWith: ReadonlyArray<string> = [

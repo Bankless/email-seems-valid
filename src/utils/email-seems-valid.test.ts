@@ -54,6 +54,9 @@ describe('form validations', () => {
     expect(emailSeemsValid('no')).toBe(false);
 
     // mis-spellings of gmail
+    expect(emailSeemsValid('test@hotmai.com')).toBe(false);
+
+    // mis-spellings of gmail
     expect(emailSeemsValid('test@gmail.ocm')).toBe(false);
     expect(emailSeemsValid('test@gmail.ccom')).toBe(false);
     expect(emailSeemsValid('test@gmail.coom')).toBe(false);
