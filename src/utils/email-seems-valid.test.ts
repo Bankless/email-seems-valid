@@ -13,6 +13,7 @@ describe('form validations', () => {
     expect(emailSeemsValid('test@yahoo.com')).toBe(true);
     expect(emailSeemsValid('test@yahoo.COM')).toBe(true);
     expect(emailSeemsValid('test@gmail.com')).toBe(true);
+    expect(emailSeemsValid('test@hotmail.com')).toBe(true);
 
     expect(emailSeemsValid('a@protonmail.com')).toBe(true);
     expect(emailSeemsValid('test@dawsbot.io')).toBe(true);
