@@ -10,9 +10,10 @@ describe('form validations', () => {
   });
   it('valid emails', () => {
     expect(emailSeemsValid('test@crazy.finance')).toBe(true);
-    expect(emailSeemsValid('test@yahoo.com')).toBe(true);
-    expect(emailSeemsValid('test@yahoo.COM')).toBe(true);
-    expect(emailSeemsValid('test@gmail.com')).toBe(true);
+    expect(emailSeemsValid('test.cmo@yahoo.com')).toBe(true);
+    expect(emailSeemsValid('gmial@yahoo.COM')).toBe(true);
+    expect(emailSeemsValid('gmia@gmail.com')).toBe(true);
+    expect(emailSeemsValid('hotmai@hotmail.com')).toBe(true);
 
     expect(emailSeemsValid('a@protonmail.com')).toBe(true);
     expect(emailSeemsValid('test@dawsbot.io')).toBe(true);
@@ -52,6 +53,9 @@ describe('form validations', () => {
 
     // must have "@"
     expect(emailSeemsValid('no')).toBe(false);
+
+    // mis-spellings of gmail
+    expect(emailSeemsValid('test@hotmai.com')).toBe(false);
 
     // mis-spellings of gmail
     expect(emailSeemsValid('test@gmail.ocm')).toBe(false);
