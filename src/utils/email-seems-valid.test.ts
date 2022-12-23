@@ -108,7 +108,9 @@ describe('form validations', () => {
     expect(emailSeemsValid('test@protonmai.com')).toBe(false);
     expect(emailSeemsValid('test@protonmil.com')).toBe(false);
 
+    // mis-spellings of yahoo
     expect(emailSeemsValid('test@yahoo.come')).toBe(false);
+    expect(emailSeemsValid('test@yhaoo.com')).toBe(false);
 
     expect(emailSeemsValid('test@foxmail.co')).toBe(false);
   });
