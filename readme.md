@@ -1,12 +1,12 @@
 <p align="center">
-  <a><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/check-mark-button_2705.png" title="Green check mark" /></a>
+  <a><img src="https://em-content.zobj.net/thumbs/240/apple/354/check-mark-button_2705.png" title="Green check mark" /></a>
 </p>
 <p align="center">
-  <b>
-  <code>
+
+   <b>
     email-seems-valid
-    </code>
-  </b>
+     </b>
+ 
   <br>
   <i>An offline check to see if an email seems valid.</i>
   <br/>
