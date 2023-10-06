@@ -60,6 +60,7 @@ describe('form validations', () => {
     // mis-spellings of gmail
     expect(emailSeemsValid('test@gmai.com')).toBe(false);
     expect(emailSeemsValid('test@gmaail.com')).toBe(false);
+    expect(emailSeemsValid('test@gmnail.com')).toBe(false);
     expect(emailSeemsValid('test@gmial.com')).toBe(false);
     expect(emailSeemsValid('test@gamal.com')).toBe(false);
     expect(emailSeemsValid('test@gemail.com')).toBe(false);
