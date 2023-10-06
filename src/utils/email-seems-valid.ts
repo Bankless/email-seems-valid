@@ -26,6 +26,7 @@ export function emailSeemsValid(emailAddress: string): boolean {
     return utf16Code < 43 || utf16Code > 126;
   });
   const doesNotInclude: ReadonlyArray<string> = [
+    '@gmaail',
     '@gmial',
     '@gmaik',
     '@gail',

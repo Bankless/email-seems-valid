@@ -58,11 +58,8 @@ describe('form validations', () => {
     expect(emailSeemsValid('test@hotmai.com')).toBe(false);
 
     // mis-spellings of gmail
-    expect(emailSeemsValid('test@gmail.ocm')).toBe(false);
-    expect(emailSeemsValid('test@gmail.ccom')).toBe(false);
-    expect(emailSeemsValid('test@gmail.coom')).toBe(false);
-    expect(emailSeemsValid('test@gmail.comc')).toBe(false);
     expect(emailSeemsValid('test@gmai.com')).toBe(false);
+    expect(emailSeemsValid('test@gmaail.com')).toBe(false);
     expect(emailSeemsValid('test@gmial.com')).toBe(false);
     expect(emailSeemsValid('test@gamal.com')).toBe(false);
     expect(emailSeemsValid('test@gemail.com')).toBe(false);
@@ -74,6 +71,11 @@ describe('form validations', () => {
 
     // bad suffixes
     expect(emailSeemsValid('test@gmail.cmo')).toBe(false);
+    expect(emailSeemsValid('test@gmail.ocm')).toBe(false);
+    expect(emailSeemsValid('test@gmail.comm')).toBe(false);
+    expect(emailSeemsValid('test@gmail.comc')).toBe(false);
+    expect(emailSeemsValid('test@gmail.coom')).toBe(false);
+    expect(emailSeemsValid('test@gmail.ccom')).toBe(false);
     expect(emailSeemsValid('test@gmail.comn')).toBe(false);
     expect(emailSeemsValid('test@gmail.comnn')).toBe(false);
     expect(emailSeemsValid('test@gmail.col')).toBe(false);
